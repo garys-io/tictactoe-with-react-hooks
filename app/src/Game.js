@@ -42,10 +42,13 @@ function Game() {
   const [isXNext, setIsXNext] = useState(true)
 
   const updateSquare = (idx, isXNext) => {
-    const newSquares = [...squares]
-    newSquares[idx] = isXNext ? "X" : "O"
-    setIsXNext(!isXNext)
-    setSquares(newSquares)
+    // check to stop overriding squares
+    if (!squares[idx]) {
+      const newSquares = [...squares]
+      newSquares[idx] = isXNext ? "X" : "O"
+      setIsXNext(!isXNext)
+      setSquares(newSquares)
+    }
   }
 
   return (
