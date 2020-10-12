@@ -1,17 +1,20 @@
-import React from "react"
+import React, { useState } from "react"
 import "./Game.css"
 
-function Square() {
-  return <button className="square">{/* TODO */}</button>
+function Square({ value, onClick }) {
+  return (
+    <button className="square" onClick={onClick}>
+      {value}
+    </button>
+  )
 }
 
-function Board() {
+function Board({ squares, updateSquare, isXNext }) {
   function renderSquare(i) {
-    return <Square />
+    return <Square value={squares[i]} onClick={() => updateSquare(i, isXNext)} />
   }
 
-  const status = "Next player: X"
-
+  const status = `Next player: ${isXNext ? "X" : "O"}`
   return (
     <div>
       <div className="status">{status}</div>
@@ -35,14 +38,23 @@ function Board() {
 }
 
 function Game() {
+  const [squares, setSquares] = useState(Array(9).fill(""))
+  const [isXNext, setIsXNext] = useState(true)
+
+  const updateSquare = (idx, isXNext) => {
+    const newSquares = [...squares]
+    newSquares[idx] = isXNext ? "X" : "O"
+    setIsXNext(!isXNext)
+    setSquares(newSquares)
+  }
+
   return (
     <div className="game">
       <div className="game-board">
-        <Board />
+        <Board squares={squares} updateSquare={updateSquare} isXNext={isXNext} />
       </div>
       <div className="game-info">
-        <div>{/* status */}</div>
-        <ol>{/* TODO */}</ol>
+        <div>{"Game info"}</div>
       </div>
     </div>
   )
