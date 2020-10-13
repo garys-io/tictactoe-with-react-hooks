@@ -1,7 +1,7 @@
 export const gameInitalState = {
   isXNext: true,
   squares: Array(9).fill(""),
-  gameInfo: "Game is going great",
+  gameInfo: "Ongoing",
 }
 
 export function gameReducer(state, action) {

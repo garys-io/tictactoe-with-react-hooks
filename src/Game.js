@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from "react"
+import React, { useReducer } from "react"
 import { gameInitalState, gameReducer } from "./GameReducer"
 import "./Game.css"
 
