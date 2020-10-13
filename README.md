@@ -6,7 +6,7 @@
 
 ## Why
 
-- I haven't used used react.js in a while and want to get up to speed with the new features
+- To get up to speed with the new react.js features
 
 ## Process
 
@@ -17,3 +17,5 @@
 1. Change the class components to functional
 
 1. Add game logic
+
+1. Extract the game logic into Redux like reducer into it's own file
