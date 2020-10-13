@@ -15,3 +15,5 @@
 1. Replace the default html, css and jsx with the one in [the codepen](https://codepen.io/gaearon/pen/oWWQNa)
 
 1. Change the class components to functional
+
+1. Add game logic
