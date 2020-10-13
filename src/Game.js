@@ -53,6 +53,9 @@ function Game() {
       <div className="game-info">
         <div>{state.gameInfo}</div>
       </div>
+      <div>
+        <button onClick={() => dispatch({ type: "RESET_GAME" })}>Reset</button>
+      </div>
     </div>
   )
 }
