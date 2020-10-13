@@ -19,3 +19,7 @@
 1. Add game logic
 
 1. Extract the game logic into Redux like reducer into it's own file
+
+1. Add unit tests for reducer by using [jest](jestjs.io)
+
+1. Add [Typescript](https://www.typescriptlang.org) for strong type and intellisense

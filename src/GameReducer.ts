@@ -1,12 +1,27 @@
 import { cloneDeep } from "lodash"
 
-export const gameInitalState = {
+export type gameInfoType = "Ongoing" | "Tie" | "Player X won" | "Player O won"
+
+export type gameReducerActionType = "SQUARE_CLICK" | "RESET_GAME"
+
+export interface gameReducerAction {
+  type: gameReducerActionType
+  idx?: number
+}
+
+export interface GameInstance {
+  isXNext: boolean
+  squares: string[]
+  gameInfo: gameInfoType
+}
+
+export const gameInitalState: GameInstance = {
   isXNext: true,
   squares: Array(9).fill(""),
   gameInfo: "Ongoing",
 }
 
-export function gameReducer(state, action) {
+export function gameReducer(state: GameInstance, action: gameReducerAction) {
   switch (action.type) {
     case "SQUARE_CLICK":
       return squareClickReducer(state, action)
@@ -19,9 +34,9 @@ export function gameReducer(state, action) {
   }
 }
 
-function squareClickReducer(state, action) {
+function squareClickReducer(state: GameInstance, action: gameReducerAction) {
   // check to stop overriding squares
-  if (!state.squares[action.idx]) {
+  if (!state.squares[parseInt(action.idx + "")]) {
     const newSquares = squaresReducer(state, action)
     return {
       ...state,
@@ -33,13 +48,13 @@ function squareClickReducer(state, action) {
   return state
 }
 
-function squaresReducer(state, action) {
+function squaresReducer(state: GameInstance, action: gameReducerAction) {
   const newSquares = [...state.squares]
-  newSquares[action.idx] = state.isXNext ? "X" : "O"
+  newSquares[parseInt(action.idx + "")] = state.isXNext ? "X" : "O"
   return newSquares
 }
 
-function gmaeInfoReducer(squares) {
+function gmaeInfoReducer(squares: string[]): gameInfoType {
   const winningCombinationsIdx = [
     // horizontal
     [0, 1, 2],
@@ -57,12 +72,12 @@ function gmaeInfoReducer(squares) {
   // check for the combinations
   for (const combination of winningCombinationsIdx) {
     const [s0, s1, s2] = [squares[combination[0]], squares[combination[1]], squares[combination[2]]]
-    if (!!s0 && s0 === s1 && s0 === s2) return `Player ${s0} Won!`
+    if (!!s0 && s0 === s1 && s0 === s2) return s0 === "X" ? "Player X won" : "Player O won"
   }
 
   // if there is no more empty squares, declare tie
   if (!squares.some((square) => square === "")) {
-    return "tie"
+    return "Tie"
   }
 
   // otherwise the game is ongoing

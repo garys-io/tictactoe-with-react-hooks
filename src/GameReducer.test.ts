@@ -1,5 +1,5 @@
 import { cloneDeep } from "lodash"
-import { gameInitalState, gameReducer } from "./GameReducer"
+import { gameInitalState, GameInstance, gameReducer } from "./GameReducer"
 
 describe("Checking the working of SQUARE_CLICK", () => {
   test("Should set a X for first move and toggle the isXNext to false", () => {
@@ -37,9 +37,9 @@ describe("Checking the working of SQUARE_CLICK", () => {
     const expectedState = {
       squares: ["O", "O", "O", "X", "X", "", "", "X", ""],
       isXNext: true,
-      gameInfo: "Player O Won!",
+      gameInfo: "Player O won",
     }
-    let state = {
+    let state: GameInstance = {
       squares: ["O", "O", "", "X", "X", "", "", "X", ""],
       isXNext: false,
       gameInfo: "Ongoing",
@@ -51,7 +51,7 @@ describe("Checking the working of SQUARE_CLICK", () => {
 
 describe("Checking the working of RESET_GAME", () => {
   test("The game should be reset to the inital condition from a random state", () => {
-    let state = {
+    let state: GameInstance = {
       squares: ["", "O", "", "X", "", "O", "O", "X", "X"],
       gameInfo: "Ongoing",
       isXNext: false,
