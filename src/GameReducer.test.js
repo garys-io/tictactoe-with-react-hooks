@@ -48,3 +48,15 @@ describe("Checking the working of SQUARE_CLICK", () => {
     expect(state).toEqual(expectedState)
   })
 })
+
+describe("Checking the working of RESET_GAME", () => {
+  test("The game should be reset to the inital condition from a random state", () => {
+    let state = {
+      squares: ["", "O", "", "X", "", "O", "O", "X", "X"],
+      gameInfo: "Ongoing",
+      isXNext: false,
+    }
+    state = gameReducer(state, { type: "RESET_GAME" })
+    expect(state).toEqual(cloneDeep(gameInitalState))
+  })
+})

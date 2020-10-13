@@ -1,3 +1,5 @@
+import { cloneDeep } from "lodash"
+
 export const gameInitalState = {
   isXNext: true,
   squares: Array(9).fill(""),
@@ -8,6 +10,10 @@ export function gameReducer(state, action) {
   switch (action.type) {
     case "SQUARE_CLICK":
       return squareClickReducer(state, action)
+    case "RESET_GAME":
+      return {
+        ...cloneDeep(gameInitalState),
+      }
     default:
       throw new Error()
   }
