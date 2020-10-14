@@ -3,34 +3,22 @@ import { gameInitalState, gameReducer } from "./GameReducer"
 import { Button, Container, Grid } from "@material-ui/core"
 
 function Board({ squares, onSquareClick }) {
-  function renderSquare(i) {
-    return (
-      <Grid item xs={4}>
-        <Button
-          fullWidth
-          style={{ height: "50px" }}
-          size="large"
-          variant="outlined"
-          color="primary"
-          onClick={() => onSquareClick(i)}
-        >
-          {squares[i]}
-        </Button>
-      </Grid>
-    )
-  }
-
   return (
     <Grid container direction="row" justify="space-evenly" alignItems="stretch" spacing={3}>
-      {renderSquare(0)}
-      {renderSquare(1)}
-      {renderSquare(2)}
-      {renderSquare(3)}
-      {renderSquare(4)}
-      {renderSquare(5)}
-      {renderSquare(6)}
-      {renderSquare(7)}
-      {renderSquare(8)}
+      {squares.map((square, i) => (
+        <Grid item xs={4} key={i}>
+          <Button
+            fullWidth
+            style={{ height: "50px" }}
+            size="large"
+            variant="outlined"
+            color="primary"
+            onClick={() => onSquareClick(i)}
+          >
+            {square}
+          </Button>
+        </Grid>
+      ))}
     </Grid>
   )
 }
