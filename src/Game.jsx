@@ -1,40 +1,37 @@
 import React, { useReducer } from "react"
 import { gameInitalState, gameReducer } from "./GameReducer"
-import "./Game.css"
+import { Button, Container, Grid } from "@material-ui/core"
 
-function Square({ value, onClick }) {
-  return (
-    <button className="square" onClick={onClick}>
-      {value}
-    </button>
-  )
-}
-
-function Board({ squares, onSquareClick, isXNext }) {
+function Board({ squares, onSquareClick }) {
   function renderSquare(i) {
-    return <Square value={squares[i]} onClick={() => onSquareClick(i)} />
+    return (
+      <Grid item xs={4}>
+        <Button
+          fullWidth
+          style={{ height: "50px" }}
+          size="large"
+          variant="outlined"
+          color="primary"
+          onClick={() => onSquareClick(i)}
+        >
+          {squares[i]}
+        </Button>
+      </Grid>
+    )
   }
 
-  const status = `Next player: ${isXNext ? "X" : "O"}`
   return (
-    <div>
-      <div className="status">{status}</div>
-      <div className="board-row">
-        {renderSquare(0)}
-        {renderSquare(1)}
-        {renderSquare(2)}
-      </div>
-      <div className="board-row">
-        {renderSquare(3)}
-        {renderSquare(4)}
-        {renderSquare(5)}
-      </div>
-      <div className="board-row">
-        {renderSquare(6)}
-        {renderSquare(7)}
-        {renderSquare(8)}
-      </div>
-    </div>
+    <Grid container direction="row" justify="space-evenly" alignItems="stretch" spacing={3}>
+      {renderSquare(0)}
+      {renderSquare(1)}
+      {renderSquare(2)}
+      {renderSquare(3)}
+      {renderSquare(4)}
+      {renderSquare(5)}
+      {renderSquare(6)}
+      {renderSquare(7)}
+      {renderSquare(8)}
+    </Grid>
   )
 }
 
@@ -42,21 +39,17 @@ function Game() {
   const [state, dispatch] = useReducer(gameReducer, gameInitalState)
 
   return (
-    <div className="game">
-      <div className="game-board">
-        <Board
-          squares={state.squares}
-          onSquareClick={(idx) => dispatch({ type: "SQUARE_CLICK", idx })}
-          isXNext={state.isXNext}
-        />
-      </div>
-      <div className="game-info">
-        <div>{state.gameInfo}</div>
-      </div>
-      <div>
-        <button onClick={() => dispatch({ type: "RESET_GAME" })}>Reset</button>
-      </div>
-    </div>
+    <Container>
+      <div>{state.gameInfo + ` Next player: ${state.isXNext ? "X" : "O"}`}</div>
+      <Board
+        squares={state.squares}
+        onSquareClick={(idx) => dispatch({ type: "SQUARE_CLICK", idx })}
+        isXNext={state.isXNext}
+      />
+      <Button variant="contained" color="primary" onClick={() => dispatch({ type: "RESET_GAME" })}>
+        Reset
+      </Button>
+    </Container>
   )
 }
 

@@ -23,3 +23,5 @@
 1. Add unit tests for reducer by using [jest](jestjs.io)
 
 1. Add [Typescript](https://www.typescriptlang.org) for strong type and intellisense
+
+1. Add [Material UI](https://material-ui.com/) to make the app look nicer
