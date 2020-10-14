@@ -42,7 +42,7 @@ function squareClickReducer(state: GameInstance, action: gameReducerAction) {
       ...state,
       isXNext: !state.isXNext,
       squares: newSquares,
-      gameInfo: gmaeInfoReducer(newSquares),
+      gameInfo: gameInfoReducer(newSquares),
     }
   }
   return state
@@ -54,7 +54,7 @@ function squaresReducer(state: GameInstance, action: gameReducerAction) {
   return newSquares
 }
 
-function gmaeInfoReducer(squares: string[]): gameInfoType {
+function gameInfoReducer(squares: string[]): gameInfoType {
   const winningCombinationsIdx = [
     // horizontal
     [0, 1, 2],
