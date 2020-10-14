@@ -47,6 +47,21 @@ describe("Checking the working of SQUARE_CLICK", () => {
     state = gameReducer(state, { type: "SQUARE_CLICK", idx: 2 })
     expect(state).toEqual(expectedState)
   })
+
+  test("Should not update any square if gameInfo is anything other than `Ongoing`", () => {
+    const expectedState = {
+      squares: ["O", "O", "", "X", "X", "", "", "X", ""],
+      isXNext: false,
+      gameInfo: "Player O won",
+    }
+    let state: GameInstance = {
+      squares: ["O", "O", "", "X", "X", "", "", "X", ""],
+      isXNext: false,
+      gameInfo: "Player O won",
+    }
+    state = gameReducer(state, { type: "SQUARE_CLICK", idx: 2 })
+    expect(state).toEqual(expectedState)
+  })
 })
 
 describe("Checking the working of RESET_GAME", () => {

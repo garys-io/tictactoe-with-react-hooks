@@ -35,8 +35,8 @@ export function gameReducer(state: GameInstance, action: gameReducerAction) {
 }
 
 function squareClickReducer(state: GameInstance, action: gameReducerAction) {
-  // check to stop overriding squares
-  if (!state.squares[parseInt(action.idx + "")]) {
+  // check to stop overriding squares and only update squares when the game is ongoing
+  if (!state.squares[parseInt(action.idx + "")] && state.gameInfo === "Ongoing") {
     const newSquares = squaresReducer(state, action)
     return {
       ...state,
